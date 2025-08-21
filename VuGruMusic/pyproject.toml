@@ -1,0 +1,22 @@
+[project]
+name = "repl-nix-workspace"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "elevenlabs>=2.11.0",
+    "email-validator>=2.2.0",
+    "fastapi>=0.116.1",
+    "flask-dance>=7.1.0",
+    "flask-login>=0.6.3",
+    "httpx>=0.28.1",
+    "oauthlib>=3.3.1",
+    "passlib[bcrypt]>=1.7.4",
+    "pydantic>=2.11.7",
+    "pyjwt>=2.10.1",
+    "python-dotenv>=1.1.1",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.20",
+    "supabase>=2.18.1",
+    "uvicorn>=0.35.0",
+]

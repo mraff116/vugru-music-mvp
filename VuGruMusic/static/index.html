@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VuGru Music MVP - Real Estate Background Music Generator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <img src="/static/vugru-logo.png" alt="VuGru" class="nav-logo">
+        </div>
+        <div id="userControls" class="user-controls">
+            <!-- User info and logout button will be inserted here -->
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        
+        <div class="hero-card">
+            <h1 class="hero-title">Generate custom background music for your real estate videos</h1>
+        </div>
+
+        <div class="content-card">
+            <form id="musicForm" class="music-form">
+                <div class="form-section">
+                    <h2>Music Description</h2>
+                    
+                    <div class="form-group">
+                        <label for="presetSelect">Quick Presets (Optional)</label>
+                        <select id="presetSelect" name="presetSelect">
+                            <option value="">Choose a preset or write custom description below</option>
+                            <option value="luxury">Luxury & Elegant</option>
+                            <option value="modern">Modern & Upbeat</option>
+                            <option value="warm">Warm & Inviting</option>
+                            <option value="corporate">Corporate & Clean</option>
+                            <option value="rustic">Rustic & Acoustic</option>
+                            <option value="cinematic">Cinematic & Dramatic</option>
+                        </select>
+                        <small>Select a preset to auto-fill the description below</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="musicPrompt">Describe the music you want</label>
+                        <textarea id="musicPrompt" name="musicPrompt" rows="4" required 
+                                  placeholder="Example: Create upbeat background music for a luxury real estate video with modern electronic elements and a professional feel..."></textarea>
+                        <small>Be specific about genre, mood, instruments, and purpose</small>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Settings</h2>
+                    
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" name="duration" required>
+                            <option value="15">15 seconds</option>
+                            <option value="30" selected>30 seconds</option>
+                        </select>
+                        <small>Shorter durations use fewer credits</small>
+                    </div>
+
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="generateBtn" class="btn btn-primary">
+                        <span class="btn-text">Generate Music</span>
+                        <span class="loading-spinner" style="display: none;">🎵</span>
+                    </button>
+                    <button type="button" id="stopBtn" class="btn btn-secondary" style="display: none;">
+                        Stop Generation
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="statusMessage" class="status-message content-card" style="display: none; margin-top: 24px;"></div>
+
+        <div id="resultsSection" class="results-section content-card" style="display: none; margin-top: 24px;">
+            <h3>Generated Track</h3>
+            <div class="audio-player">
+                <audio id="audioPlayer" controls style="width: 100%;">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="result-actions">
+                <button id="downloadBtn" class="btn btn-success">Download Track</button>
+            </div>
+            <div class="prompt-display">
+                <h4>Generated Prompt</h4>
+                <p id="promptText" class="prompt-text"></p>
+            </div>
+        </div>
+
+        <div id="recentTracks" class="recent-tracks content-card" style="display: none; margin-top: 24px;">
+            <h3>Recent Tracks</h3>
+            <div id="tracksList" class="tracks-list"></div>
+        </div>
+        
+        <!-- User's Music Library -->
+        <div id="musicLibrary" class="music-library content-card" style="display: none; margin-top: 24px;">
+            <h3>My Music Library</h3>
+            <div id="libraryContent">
+                <div class="loading-message" style="text-align: center; padding: 20px; color: #6b7280;">
+                    Loading your music library...
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <footer>
+            <p class="disclaimer">
+                🏠 Music generated for background use in real estate videos. 
+                Please review all tracks for appropriateness before publishing.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Authentication check and logout functionality
+        function handleLogout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            window.location.href = '/static/login.html';
+        }
+        
+        (function() {
+            const token = localStorage.getItem('authToken');
+            const userStr = localStorage.getItem('user');
+            
+            console.log('Auth check - token exists:', !!token, 'user exists:', !!userStr);
+            
+            if (!token || !userStr) {
+                console.log('No authentication found, redirecting to login...');
+                window.location.replace('/static/login.html');
+                return;
+            }
+        })();
+    </script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
